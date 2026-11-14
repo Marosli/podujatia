@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skutočné podujatia · Bratislava a okolie</title>
+<meta name="description" content="Malé akcie v Bratislave a do 50 km: hody, trhy, otvorené pivnice, koncerty v kultúrnych domoch. Zbierané denne z webov obcí a kultúrnych centier.">
+<meta name="theme-color" content="#f3efe6">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="panel" id="panel">
+    <header class="masthead">
+      <h1 class="brand"><a href="./"><span class="brand-mark" aria-hidden="true"></span>skutočné podujatia</a></h1>
+      <p class="kicker">Malé akcie v&nbsp;Bratislave a&nbsp;do 50&nbsp;km, z&nbsp;webov obcí a&nbsp;kultúrnych domov</p>
+      <p class="summary" id="summary"></p>
+    </header>
+
+    <section class="controls" id="controls" aria-label="Filtre">
+      <div class="presets" role="group" aria-label="Obdobie">
+        <button type="button" data-preset="weekend" class="preset">Tento víkend</button>
+        <button type="button" data-preset="today" class="preset">Dnes</button>
+        <button type="button" data-preset="tomorrow" class="preset">Zajtra</button>
+        <button type="button" data-preset="next-weekend" class="preset">Ďalší víkend</button>
+      </div>
+      <div class="strip-wrap" id="strip-wrap">
+        <div class="strip" id="strip" role="group" aria-label="Kalendár, výška stĺpca je počet akcií v daný deň"></div>
+      </div>
+      <div class="chips-wrap"><div class="chips" id="chips" role="group" aria-label="Druh akcie"></div></div>
+      <div class="row-controls">
+        <label class="search">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>
+          <input id="q" type="search" placeholder="Hľadať obec, akciu, miesto" autocomplete="off" aria-label="Hľadať">
+        </label>
+        <label class="radius">
+          <span class="visually-hidden">Vzdialenosť od Bratislavy</span>
+          <select id="radius">
+            <option value="50">do 50 km</option>
+            <option value="25">do 25 km</option>
+            <option value="12">len Bratislava</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <div class="placebar" id="placebar" hidden>
+      <span class="placebar-label" id="placebar-label"></span>
+      <button type="button" id="placebar-clear">Zobraziť všetko</button>
+    </div>
+
+    <section class="picks" id="picks" aria-label="Neprehliadnite" hidden></section>
+    <p class="visually-hidden" role="status" id="status"></p>
+    <main class="list" id="list"></main>
+    <footer class="colophon" id="colophon"></footer>
+  </aside>
+
+  <div class="mapwrap" id="mapwrap">
+    <div id="map" aria-label="Mapa podujatí"></div>
+    <div class="legend" id="legend" aria-hidden="true"></div>
+  </div>
+
+  <button type="button" class="toggle" id="toggle" aria-controls="mapwrap">
+    <svg class="i-map" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 5l5-2 6 2 5-2v12l-5 2-6-2-5 2z"/><path d="M7 3v12M13 5v12"/></svg>
+    <svg class="i-list" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5h11M7 10h11M7 15h11"/><circle cx="3" cy="5" r=".8"/><circle cx="3" cy="10" r=".8"/><circle cx="3" cy="15" r=".8"/></svg>
+    <span>Mapa</span>
+  </button>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
